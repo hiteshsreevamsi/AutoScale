@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% block body %}
+    {% for message in get_flashed_messages() %}
+        <div aria-live="polite" aria-atomic="true" class="position-relative">
+            <div class="toast-container position-absolute top-0 end-0 p-3">
+                <div class="toast align-items-center text-white bg-danger border-0" role="alert" aria-live="assertive"
+                     aria-atomic="true">
+                    <div class="d-flex">
+                        <div class="toast-body">
+                            {{ message }}
+                        </div>
+                        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
+                                aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row mb-5">
+        <div class="col-lg-4 col-lg-offset-4 mx-auto">
+            <h1 class="display-1 lead text-center">....................</h1>
+        </div>
+    </div>
+    <form method="post">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4 mx-auto">
+                <div class="input-group input-group-lg mb-5">
+                    <input type="text" class="form-control" placeholder="Zipcode to search..."
+                           aria-label="Zipcode to search..." name="search_query"
+                           aria-describedby="search" required maxlength="5" minlength="4">
+                    <button class="btn btn-outline-secondary" type="submit" id="search">Search</button>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 text-center mx-auto">
+                <div class="btn-group btn-group-lg" role="group" aria-label="Radius Toggle">
+                    <input type="radio" class="btn-check" value="50" name="radius" id="50m" autocomplete="off"
+                           checked>
+                    <label class="btn btn-outline-primary" for="50m">50 Miles</label>
+
+                    <input type="radio" class="btn-check" value="100" name="radius" id="100m" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="100m">100 Miles</label>
+                </div>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
+{% block scripts %}
+    <script>
+        const option = {
+            animation: true,
+            autohide: true,
+            delay: 5000
+        }
+        const toastElList = [].slice.call(document.querySelectorAll('.toast'));
+        const toastList = toastElList.map(function (toastEl) {
+            return new bootstrap.Toast(toastEl, option)
+        });
+        for (const toastListKey in toastList) {
+            toastList[toastListKey].show();
+        }
+    </script>
+{% endblock %}
