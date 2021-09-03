@@ -80,6 +80,6 @@ def search(zipcode, miles):
     return dict(cars=cars)
 
 
-load_all()
+#load_all()
 if __name__ == "__main__":
-    app.run(host="localhost", debug=True, port=8000)
+    app.run(host="0.0.0.0")

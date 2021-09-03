@@ -37,6 +37,8 @@ def load_listings():
     for i, temp_store in data_listings.iterrows():
         if db.session.query(Listings.vehicle_live_id).filter_by(vehicle_live_id=temp_store.vehicle_live_id).first():
             continue
+        if len(str(temp_store["zip"])) < 5:
+            temp_store["zip"] = "0"*(5-len(str(temp_store["zip"])))+str(temp_store["zip"])
         db.session.add(Listings(**temp_store[cols_in_scope]))
     try:
         db.session.commit()
