@@ -24,7 +24,7 @@ class CustomEncoder(JSONEncoder):
         return JSONEncoder.default(self, o)
 
 
-app = flask.Flask(__name__)
+app = flask.Flask(__name__, static_url_path='')
 app.secret_key = "some-random-secret-key"
 base_directory = path = os.path.dirname(os.path.realpath(__file__))
 app.json_encoder = CustomEncoder
