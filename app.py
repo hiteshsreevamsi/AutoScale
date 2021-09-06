@@ -80,6 +80,11 @@ def search(zipcode, miles):
     return dict(cars=cars)
 
 
-#load_all()
+@app.route("/load_data", methods=["GET"])
+def load_data_into_db():
+    load_all()
+    return ""
+
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0")
+    app.run(host="localhost")
